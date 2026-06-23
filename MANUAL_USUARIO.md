@@ -1,92 +1,142 @@
-# Sistema de Gestión de Cheques Emitidos
+# Manual de Usuario e Instalación
 
-## Descripción del proyecto
+## Sistema de Gestión de Cheques Emitidos
 
-El presente proyecto corresponde al desarrollo de un prototipo web multiusuario para la gestión de cheques emitidos, orientado a comerciantes de la ciudad de Encarnación. El sistema permite registrar, organizar, consultar y controlar cheques emitidos dentro de un entorno digital estructurado, reduciendo la dependencia de registros manuales, agendas físicas o planillas dispersas.
+## 1. Presentación
 
-El prototipo fue desarrollado como parte de un Trabajo Fin de Grado de la carrera de Análisis de Sistemas Informáticos. Su alcance corresponde a un producto mínimo viable, centrado en funciones esenciales como gestión de usuarios, control de acceso por roles, registro de cheques emitidos, actualización de estados, alertas por correo electrónico, reportes operativos y bitácora de eventos.
+El presente manual describe el proceso de instalación, configuración y uso básico del prototipo web **Sistema de Gestión de Cheques Emitidos**. El sistema fue desarrollado como Trabajo Fin de Grado de la carrera de Análisis de Sistemas Informáticos de la Universidad Autónoma de Encarnación.
 
-## Características principales
+El prototipo está orientado a comerciantes de la ciudad de Encarnación y permite registrar, consultar, controlar y dar seguimiento a cheques emitidos dentro de un entorno digital estructurado.
 
-* Inicio de sesión mediante credenciales de usuario.
-* Control de acceso basado en roles: Administrador, Supervisor y Operador.
-* Gestión de usuarios internos del sistema.
-* Registro de cheques emitidos.
-* Validación de datos obligatorios del cheque.
-* Control de unicidad mediante banco, cuenta bancaria y número de cheque.
-* Gestión de estados normales y críticos.
-* Registro obligatorio de motivo en estados críticos cuando corresponde.
-* Control de concurrencia para evitar modificaciones inconsistentes.
-* Envío de alertas por correo electrónico mediante SMTP.
-* Bandeja de notificaciones pendientes, enviadas y fallidas.
-* Reintento manual de notificaciones fallidas.
-* Generación de reportes operativos.
-* Registro de eventos relevantes en bitácora.
-* Consulta de trazabilidad de acciones realizadas por los usuarios.
+El sistema contempla funciones de gestión de usuarios, control de acceso por roles, registro de cheques emitidos, actualización de estados, gestión de estados críticos, alertas por correo electrónico, reportes operativos y bitácora de eventos.
 
-## Roles del sistema
+## 2. Alcance del sistema
 
-### Administrador
+El sistema fue desarrollado como prototipo académico funcional y producto mínimo viable. Su funcionamiento fue previsto para entorno local, con datos de prueba.
 
-El Administrador gestiona usuarios internos, roles, configuraciones básicas y bandeja de notificaciones. También puede revisar notificaciones pendientes, enviadas o fallidas y reintentar envíos cuando corresponda.
+El sistema permite:
 
-### Supervisor
+* Registrar cheques emitidos.
+* Consultar cheques registrados.
+* Actualizar estados normales.
+* Gestionar estados críticos.
+* Registrar motivos en operaciones sensibles.
+* Generar alertas por vencimiento.
+* Revisar notificaciones pendientes, enviadas y fallidas.
+* Generar reportes operativos.
+* Registrar acciones relevantes en bitácora.
+* Controlar el acceso mediante roles.
 
-El Supervisor controla operaciones sensibles, gestiona estados críticos de cheques, autoriza reversiones cuando corresponda y accede a reportes del sistema.
+El sistema no contempla integración bancaria real, verificación en línea de fondos, OCR, gestión multiempresa, multimoneda ni despliegue productivo definitivo.
 
-### Operador
+## 3. Roles del sistema
+
+El sistema cuenta con tres roles principales: Administrador, Supervisor y Operador.
+
+### 3.1. Administrador
+
+El Administrador gestiona usuarios internos, roles, configuraciones básicas y bandeja de notificaciones. También puede revisar notificaciones pendientes, enviadas o fallidas, además de reintentar envíos cuando corresponda.
+
+### 3.2. Supervisor
+
+El Supervisor controla operaciones sensibles, gestiona estados críticos de cheques, accede a reportes y puede autorizar reversiones cuando corresponda.
+
+### 3.3. Operador
 
 El Operador registra cheques emitidos, consulta información básica y actualiza estados normales del cheque según las reglas del sistema.
 
-## Tecnologías utilizadas
+## 4. Requisitos previos para la instalación
 
-### Backend y servidor
+Antes de instalar el proyecto, se deben tener instaladas las siguientes herramientas:
 
-* PHP
-* Laravel
-* Eloquent ORM
-* Servidor integrado de Laravel para entorno local
+* PHP 8.2 o superior.
+* Composer.
+* PostgreSQL 16 o superior.
+* Node.js y npm.
+* Git.
+* Navegador web actualizado, como Chrome, Edge o Firefox.
+* DBeaver u otra herramienta para administrar la base de datos.
+* Cuenta de correo o servicio SMTP configurado para pruebas de notificaciones.
 
-### Frontend
+## 5. Descarga del proyecto
 
-* Blade
-* HTML
-* CSS
-* JavaScript básico
+Para obtener el código fuente, se debe clonar el repositorio desde GitHub.
 
-### Base de datos
+```bash
+git clone https://github.com/aracelipa/gestion-cheques-emitidos.git
+cd gestion-cheques-emitidos
+```
 
-* PostgreSQL
+Si el proyecto se descarga manualmente como archivo comprimido desde GitHub, se debe descomprimir la carpeta y abrirla desde el editor de código correspondiente.
 
-### Servicios externos
+## 6. Instalación de dependencias
 
-* SMTP externo para envío de notificaciones por correo electrónico
+### 6.1. Instalar dependencias de PHP
 
-### Herramientas de desarrollo y apoyo
+Dentro de la carpeta del proyecto, ejecutar:
 
-* Visual Studio Code
-* DBeaver
-* Git
-* GitHub
-* Trello
-* Draw.io
-* Microsoft Word
+```bash
+composer install
+```
 
-## Servicios externos y APIs utilizadas
+Este comando instala las dependencias necesarias del proyecto Laravel.
 
-### Servicio SMTP externo
+### 6.2. Instalar dependencias de Node.js
 
-El sistema utiliza un servicio SMTP externo para el envío de alertas y notificaciones por correo electrónico. Este servicio permite notificar vencimientos próximos o vencimientos del día a los destinatarios registrados.
+Ejecutar:
 
-Para su uso se requiere:
+```bash
+npm install
+```
 
-* Cuenta de correo habilitada para envío SMTP.
-* Contraseña de aplicación o credencial equivalente.
-* Configuración de variables en el archivo `.env`.
+Este comando instala las dependencias necesarias para los recursos frontend del proyecto.
 
-Las credenciales reales no deben subirse al repositorio. El archivo `.env` debe mantenerse fuera del control de versiones mediante `.gitignore`.
+## 7. Configuración del archivo de entorno
 
-Variables relacionadas:
+El proyecto utiliza un archivo de configuración llamado `.env`. Por seguridad, este archivo no debe subirse al repositorio.
+
+Para configurarlo, copiar el archivo `.env.example` y renombrarlo como `.env`.
+
+En Windows puede realizarse manualmente copiando el archivo `.env.example` y cambiando su nombre a `.env`.
+
+También puede ejecutarse:
+
+```bash
+cp .env.example .env
+```
+
+Después de crear el archivo `.env`, generar la clave de aplicación:
+
+```bash
+php artisan key:generate
+```
+
+## 8. Configuración de la base de datos
+
+Crear una base de datos en PostgreSQL. Se recomienda utilizar el nombre:
+
+```text
+gestion_cheques
+```
+
+Luego editar el archivo `.env` con los datos correspondientes:
+
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=gestion_cheques
+DB_USERNAME=postgres
+DB_PASSWORD=tu_contraseña
+```
+
+El valor de `DB_PASSWORD` debe reemplazarse por la contraseña real del usuario local de PostgreSQL.
+
+## 9. Configuración del correo SMTP
+
+El sistema utiliza SMTP externo para el envío de alertas y notificaciones por correo electrónico.
+
+En el archivo `.env`, configurar las siguientes variables:
 
 ```env
 MAIL_MAILER=smtp
@@ -99,175 +149,31 @@ MAIL_FROM_ADDRESS=correo_de_prueba@example.com
 MAIL_FROM_NAME="Sistema de Cheques"
 ```
 
-## Requisitos previos
+Si se utiliza Gmail, se recomienda utilizar una contraseña de aplicación. La contraseña debe copiarse sin espacios adicionales.
 
-Antes de instalar el proyecto, se deben tener instaladas las siguientes herramientas:
+## 10. Ejecución de migraciones
 
-* PHP 8.2 o superior.
-* Composer.
-* PostgreSQL 16 o superior.
-* Node.js y npm, si se requiere compilar recursos frontend.
-* Git.
-* Navegador web actualizado, como Chrome, Edge o Firefox.
-* DBeaver u otra herramienta para administrar la base de datos.
-* Cuenta de correo o servicio SMTP configurado para pruebas de notificaciones.
-
-## Estructura general del proyecto
-
-```text
-gestion-cheques/
-│
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   └── Middleware/
-│   ├── Models/
-│   └── ...
-│
-├── database/
-│   ├── migrations/
-│   ├── seeders/
-│   └── factories/
-│
-├── resources/
-│   ├── views/
-│   ├── css/
-│   └── js/
-│
-├── routes/
-│   └── web.php
-│
-├── public/
-│
-├── storage/
-│
-├── .env.example
-├── composer.json
-├── package.json
-└── README.md
-```
-
-### Descripción de carpetas principales
-
-* `app/`: contiene la lógica principal del sistema, modelos, controladores y middleware.
-* `database/`: contiene migraciones, seeders y estructura de base de datos.
-* `resources/views/`: contiene las vistas Blade del sistema.
-* `routes/web.php`: contiene las rutas web del prototipo.
-* `public/`: contiene archivos públicos del sistema.
-* `storage/`: contiene archivos generados o almacenados por Laravel.
-* `.env.example`: archivo de ejemplo para configurar variables de entorno.
-
-## Instalación del proyecto
-
-### 1. Clonar el repositorio
-
-```bash
-git clone URL_DEL_REPOSITORIO
-cd NOMBRE_DEL_PROYECTO
-```
-
-### 2. Instalar dependencias de PHP
-
-```bash
-composer install
-```
-
-### 3. Instalar dependencias de Node.js
-
-```bash
-npm install
-```
-
-### 4. Copiar archivo de entorno
-
-```bash
-cp .env.example .env
-```
-
-En Windows, si el comando anterior no funciona, copiar manualmente el archivo `.env.example` y renombrarlo como `.env`.
-
-### 5. Generar clave de aplicación
-
-```bash
-php artisan key:generate
-```
-
-### 6. Configurar la base de datos
-
-Crear una base de datos en PostgreSQL. Luego editar el archivo `.env` con los datos correspondientes:
-
-```env
-DB_CONNECTION=pgsql
-DB_HOST=127.0.0.1
-DB_PORT=5432
-DB_DATABASE=gestion_cheques
-DB_USERNAME=usuario_postgres
-DB_PASSWORD=contraseña_postgres
-```
-
-### 7. Ejecutar migraciones
+Una vez configurada la base de datos, ejecutar:
 
 ```bash
 php artisan migrate
 ```
 
-Si el proyecto incluye seeders para datos iniciales, ejecutar:
-
-```bash
-php artisan db:seed
-```
-
-O, si corresponde:
+Si el proyecto cuenta con seeders para datos iniciales, ejecutar:
 
 ```bash
 php artisan migrate --seed
 ```
 
-### 8. Compilar recursos frontend
+O, si las migraciones ya fueron ejecutadas previamente:
 
 ```bash
-npm run dev
+php artisan db:seed
 ```
 
-### 9. Iniciar el servidor local
+## 11. Ejecución del sistema en entorno local
 
-```bash
-php artisan serve
-```
-
-El sistema estará disponible normalmente en:
-
-```text
-http://127.0.0.1:8000
-```
-
-## Variables de entorno principales
-
-| Variable          | Descripción                 | Ejemplo                                         |
-| ----------------- | --------------------------- | ----------------------------------------------- |
-| APP_NAME          | Nombre de la aplicación     | Sistema de Cheques                              |
-| APP_ENV           | Entorno de ejecución        | local                                           |
-| APP_KEY           | Clave generada por Laravel  | Generada automáticamente                        |
-| APP_DEBUG         | Modo depuración             | true                                            |
-| APP_URL           | URL local del sistema       | http://127.0.0.1:8000                           |
-| DB_CONNECTION     | Motor de base de datos      | pgsql                                           |
-| DB_HOST           | Servidor de base de datos   | 127.0.0.1                                       |
-| DB_PORT           | Puerto de PostgreSQL        | 5432                                            |
-| DB_DATABASE       | Nombre de la base de datos  | gestion_cheques                                 |
-| DB_USERNAME       | Usuario de base de datos    | postgres                                        |
-| DB_PASSWORD       | Contraseña de base de datos | No incluir valor real                           |
-| MAIL_MAILER       | Tipo de servicio de correo  | smtp                                            |
-| MAIL_HOST         | Servidor SMTP               | smtp.gmail.com                                  |
-| MAIL_PORT         | Puerto SMTP                 | 587                                             |
-| MAIL_USERNAME     | Correo usado para enviar    | [correo@example.com](mailto:correo@example.com) |
-| MAIL_PASSWORD     | Contraseña de aplicación    | No incluir valor real                           |
-| MAIL_ENCRYPTION   | Tipo de cifrado             | tls                                             |
-| MAIL_FROM_ADDRESS | Correo remitente            | [correo@example.com](mailto:correo@example.com) |
-| MAIL_FROM_NAME    | Nombre del remitente        | Sistema de Cheques                              |
-
-## Ejecución completa del proyecto en local
-
-Para ejecutar el sistema en entorno local, se recomienda utilizar dos terminales.
+Para ejecutar el sistema, se recomienda utilizar dos terminales.
 
 ### Terminal 1: servidor Laravel
 
@@ -287,7 +193,7 @@ Luego ingresar desde el navegador a:
 http://127.0.0.1:8000
 ```
 
-## Comandos disponibles
+## 12. Comandos útiles
 
 | Comando                    | Descripción                                   |
 | -------------------------- | --------------------------------------------- |
@@ -303,63 +209,253 @@ http://127.0.0.1:8000
 | php artisan cache:clear    | Limpia caché general del sistema.             |
 | php artisan route:clear    | Limpia caché de rutas.                        |
 
-## Uso básico del sistema
+## 13. Acceso al sistema
 
-### Inicio de sesión
+Para ingresar al sistema, el usuario debe contar con un nickname y contraseña asignados.
 
-1. Acceder a la URL local del sistema.
-2. Ingresar nickname y contraseña.
-3. Presionar el botón “Ingresar”.
-4. El sistema mostrará el panel correspondiente según el rol asignado.
+Pasos:
 
-### Registro de cheque emitido
+1. Abrir el navegador web.
+2. Ingresar a la dirección local del sistema.
+3. Escribir el nickname.
+4. Escribir la contraseña.
+5. Presionar el botón “Ingresar”.
 
-1. Ingresar con un usuario autorizado.
+Si las credenciales son correctas, el sistema mostrará el panel principal correspondiente al rol asignado.
+
+Si las credenciales son incorrectas, el sistema mostrará un mensaje de error y no permitirá el acceso.
+
+## 14. Recuperación de contraseña
+
+Esta función permite solicitar el restablecimiento de contraseña cuando un usuario no recuerda sus credenciales.
+
+Pasos:
+
+1. Ingresar a la pantalla de inicio de sesión.
+2. Presionar la opción “He olvidado mi contraseña”.
+3. Ingresar el nickname del usuario.
+4. Enviar la solicitud.
+5. Esperar la intervención del Administrador.
+6. Ingresar posteriormente con la contraseña temporal generada.
+7. Cambiar la contraseña cuando el sistema lo solicite.
+
+El sistema exige el cambio de contraseña luego del restablecimiento para reforzar la seguridad del acceso.
+
+## 15. Gestión de usuarios
+
+Esta función está disponible para el rol Administrador.
+
+### 15.1. Crear usuario
+
+Pasos:
+
+1. Ingresar con rol Administrador.
+2. Acceder al módulo de usuarios.
+3. Seleccionar la opción “Nuevo usuario”.
+4. Completar los datos requeridos.
+5. Asignar el rol correspondiente.
+6. Guardar el registro.
+
+Resultado esperado: el sistema registra el nuevo usuario y asocia el rol seleccionado.
+
+### 15.2. Editar usuario
+
+Pasos:
+
+1. Acceder al listado de usuarios.
+2. Seleccionar el usuario correspondiente.
+3. Modificar los datos permitidos.
+4. Guardar los cambios.
+
+Resultado esperado: el sistema actualiza la información del usuario.
+
+## 15.3. Desactivar usuario
+
+La desactivación o baja de un usuario se realiza desde la pantalla de edición del usuario, cambiando el campo Estado a Inactivo.
+
+Pasos:
+
+1. Ingresar con rol Administrador.
+2. Acceder al módulo de usuarios.
+3. Seleccionar el usuario correspondiente.
+4. Ingresar a la opción de edición.
+5. En el campo Estado, seleccionar Inactivo.
+6. Guardar los cambios.
+
+Resultado esperado: el usuario queda registrado con estado Inactivo y no podrá acceder al sistema.
+
+Observación: si se desea impedir temporalmente el acceso sin dar de baja al usuario, puede seleccionarse el estado Bloqueado.
+
+## 16. Registro de cheque emitido
+
+Esta función permite cargar un nuevo cheque emitido en el sistema.
+
+Usuario principal: Operador.
+
+Pasos:
+
+1. Ingresar al sistema.
 2. Acceder al módulo de cheques.
-3. Seleccionar la opción para registrar un nuevo cheque.
-4. Completar banco, cuenta, número de cheque, beneficiario, monto, fecha de emisión y fecha de vencimiento.
-5. Guardar el registro.
-6. El sistema validará los datos y registrará el cheque con su estado inicial.
+3. Seleccionar la opción “Registrar cheque”.
+4. Completar los datos requeridos:
 
-### Actualización de estados
+   * Banco.
+   * Cuenta bancaria.
+   * Número de cheque.
+   * Beneficiario.
+   * Monto.
+   * Fecha de emisión.
+   * Fecha de vencimiento.
+5. Revisar que los datos sean correctos.
+6. Presionar “Guardar”.
+
+Resultado esperado: el sistema registra el cheque emitido con su estado inicial.
+
+Posibles errores:
+
+* Campos obligatorios incompletos.
+* Monto inválido.
+* Fechas incorrectas.
+* Cheque duplicado por combinación de banco, cuenta bancaria y número de cheque.
+
+## 17. Consulta de cheques emitidos
+
+Esta función permite revisar los cheques registrados en el sistema.
+
+Pasos:
+
+1. Acceder al módulo de cheques.
+2. Revisar el listado de cheques emitidos.
+3. Utilizar los filtros disponibles, si corresponde.
+4. Seleccionar un cheque para ver su detalle.
+
+Resultado esperado: el usuario visualiza la información registrada del cheque, incluyendo datos principales, estado y fechas asociadas.
+
+## 18. Actualización de estado normal
+
+Esta función permite actualizar el estado de un cheque dentro del flujo normal permitido.
+
+Usuario principal: Operador.
+
+Pasos:
 
 1. Acceder al listado de cheques.
 2. Seleccionar el cheque correspondiente.
-3. Elegir la opción de actualización de estado.
+3. Elegir la opción de actualizar estado.
 4. Seleccionar el nuevo estado permitido.
 5. Confirmar la operación.
-6. El sistema registrará el cambio en la bitácora.
 
-### Gestión de estados críticos
+Resultado esperado: el sistema actualiza el estado del cheque y registra la acción en la bitácora.
+
+## 19. Gestión de estados críticos
+
+Esta función permite registrar estados críticos como Pagado, Rechazado o Anulado.
+
+Usuario autorizado: Supervisor.
+
+Pasos:
+
+1. Ingresar con rol Supervisor.
+2. Acceder al listado de cheques.
+3. Seleccionar el cheque correspondiente.
+4. Elegir la opción de estado crítico.
+5. Seleccionar el estado correspondiente.
+6. Ingresar el motivo obligatorio cuando el sistema lo solicite.
+7. Confirmar la operación.
+
+Resultado esperado: el sistema actualiza el estado crítico del cheque y registra el evento en la bitácora.
+
+Observación: los estados críticos requieren mayor control, por lo que solo pueden ser gestionados por el Supervisor.
+
+## 20. Reversión de estados
+
+La reversión permite corregir un estado marcado por error sin eliminar el evento original.
+
+Usuario autorizado: Supervisor.
+
+Pasos:
 
 1. Ingresar con rol Supervisor.
 2. Seleccionar el cheque correspondiente.
-3. Elegir el estado crítico aplicable.
-4. Ingresar motivo obligatorio cuando corresponda.
+3. Elegir la opción de reversión, si se encuentra disponible.
+4. Ingresar el motivo obligatorio.
 5. Confirmar la operación.
-6. El sistema registrará el evento en la bitácora.
 
-### Notificaciones
+Resultado esperado: el sistema registra un nuevo evento de corrección y mantiene trazabilidad del cambio realizado.
 
-1. El sistema genera alertas relacionadas con vencimientos.
-2. Las notificaciones pueden quedar pendientes, enviadas o fallidas.
-3. El Administrador puede revisar la bandeja de notificaciones.
-4. En caso de error, puede reintentar el envío.
+## 21. Bandeja de notificaciones
 
-### Reportes
+Esta función permite revisar el estado de las notificaciones generadas por el sistema.
 
-1. Ingresar con rol autorizado.
+Usuario autorizado: Administrador.
+
+Estados posibles:
+
+* Pendiente: notificación generada, aún no enviada.
+* Enviada: notificación enviada correctamente.
+* Fallida: notificación que no pudo ser enviada.
+
+Pasos:
+
+1. Ingresar con rol Administrador.
+2. Acceder al módulo de notificaciones.
+3. Revisar las pestañas o filtros disponibles:
+
+   * Pendientes.
+   * Enviadas.
+   * Fallidas.
+4. Seleccionar una notificación para revisar su detalle.
+5. En caso de notificación fallida, seleccionar la opción de reintento si corresponde.
+
+Resultado esperado: el Administrador puede controlar el estado de las notificaciones y reintentar envíos fallidos.
+
+## 22. Reportes
+
+Esta función permite consultar información organizada sobre los cheques emitidos.
+
+Usuario autorizado: Supervisor.
+
+Pasos:
+
+1. Ingresar con rol Supervisor.
 2. Acceder al módulo de reportes.
-3. Aplicar filtros por estado, fecha, beneficiario, banco o monto.
-4. Visualizar, imprimir o exportar la información disponible.
+3. Seleccionar los filtros disponibles:
 
-### Bitácora
+   * Estado.
+   * Fecha.
+   * Beneficiario.
+   * Banco.
+   * Monto.
+4. Generar la consulta.
+5. Visualizar, imprimir o exportar el reporte según las opciones disponibles.
+
+Resultado esperado: el sistema muestra información organizada para apoyar el seguimiento de los cheques emitidos.
+
+## 23. Bitácora
+
+La bitácora permite revisar eventos relevantes realizados dentro del sistema.
+
+Pasos:
 
 1. Acceder al módulo de bitácora.
-2. Revisar los eventos registrados.
-3. Consultar usuario responsable, fecha, hora y descripción de la acción.
+2. Revisar el listado de eventos registrados.
+3. Consultar la fecha, hora, usuario responsable y descripción de la acción.
 
-## Pruebas básicas de funcionamiento
+Resultado esperado: el sistema permite visualizar la trazabilidad de las operaciones realizadas.
+
+## 24. Cierre de sesión
+
+Al finalizar el uso del sistema, el usuario debe cerrar sesión.
+
+Pasos:
+
+1. Presionar la opción de usuario o menú superior.
+2. Seleccionar “Cerrar sesión”.
+3. Confirmar la salida si corresponde.
+
+Resultado esperado: el sistema finaliza la sesión activa y retorna a la pantalla de inicio de sesión.
+
+## 25. Pruebas básicas de funcionamiento
 
 Para verificar que el sistema funciona correctamente, se recomienda realizar las siguientes pruebas:
 
@@ -378,9 +474,9 @@ Para verificar que el sistema funciona correctamente, se recomienda realizar las
 13. Generar un reporte filtrado.
 14. Cerrar sesión correctamente.
 
-## Posibles problemas y soluciones
+## 26. Problemas frecuentes y soluciones
 
-### Error de conexión con la base de datos
+### 26.1. Error de conexión con la base de datos
 
 Causa posible: datos incorrectos en el archivo `.env` o base de datos no creada.
 
@@ -395,7 +491,7 @@ Solución:
 php artisan migrate
 ```
 
-### Error al enviar correos SMTP
+### 26.2. Error al enviar correos SMTP
 
 Causa posible: credenciales SMTP incorrectas, contraseña de aplicación inválida o configuración incompleta.
 
@@ -410,7 +506,7 @@ Solución:
 php artisan config:clear
 ```
 
-### Error al leer el archivo .env
+### 26.3. Error al leer el archivo .env
 
 Causa posible: espacios o caracteres inválidos en alguna variable de entorno.
 
@@ -420,7 +516,7 @@ Solución:
 2. Si un valor requiere espacios, encerrarlo entre comillas.
 3. Verificar especialmente `MAIL_PASSWORD`.
 
-### Las notificaciones no aparecen en la bandeja
+### 26.4. Las notificaciones no aparecen en la bandeja
 
 Causa posible: no se generaron registros internos de notificación o no se ejecutó el proceso correspondiente.
 
@@ -430,7 +526,7 @@ Solución:
 2. Revisar la lógica de generación de notificaciones.
 3. Confirmar que la base de datos registre los intentos de envío.
 
-### Los montos se ven desalineados en PDF
+### 26.5. Los montos se ven desalineados en PDF
 
 Causa posible: salto de línea entre el símbolo de guaraníes y el monto.
 
@@ -439,7 +535,7 @@ Solución:
 1. Aplicar una clase de estilo que mantenga el monto en una sola línea.
 2. Usar `white-space: nowrap` en la celda correspondiente del reporte.
 
-## Seguridad
+## 27. Seguridad y recomendaciones
 
 El sistema incorpora mecanismos básicos de seguridad acordes al alcance del prototipo:
 
@@ -454,46 +550,36 @@ El sistema incorpora mecanismos básicos de seguridad acordes al alcance del pro
 * Protección de credenciales mediante archivo `.env`.
 * Exclusión del archivo `.env` del repositorio mediante `.gitignore`.
 
-No deben subirse al repositorio credenciales reales, contraseñas, tokens ni datos sensibles.
-
-## Recomendaciones importantes
+Recomendaciones:
 
 * No compartir usuarios ni contraseñas entre personas.
 * No subir el archivo `.env` al repositorio.
 * Usar `.env.example` para documentar variables necesarias sin incluir valores reales.
-* Mantener actualizadas las dependencias del proyecto.
-* Revisar periódicamente la bandeja de notificaciones fallidas.
 * Verificar que PostgreSQL esté activo antes de ejecutar el sistema.
 * Verificar la configuración SMTP antes de probar alertas por correo.
 * Usar datos ficticios o de prueba durante la validación académica.
 * Cerrar sesión al finalizar el uso del sistema.
+* Revisar periódicamente la bandeja de notificaciones fallidas.
 
-## Despliegue
+## 28. Archivos que no deben subirse al repositorio
 
-El proyecto fue desarrollado y probado en un entorno local como prototipo académico. No se contempla despliegue productivo definitivo en esta etapa.
+Por seguridad y buenas prácticas, no deben subirse los siguientes archivos o carpetas:
 
-Para una futura implementación en producción, se recomienda considerar:
+```text
+.env
+vendor/
+node_modules/
+```
 
-* Servidor web compatible con PHP y Laravel.
-* Base de datos PostgreSQL configurada en servidor seguro.
-* Certificado SSL/TLS para HTTPS.
-* Configuración segura de variables de entorno.
-* Servicio SMTP estable.
-* Copias de seguridad periódicas.
-* Pruebas de seguridad y rendimiento.
-* Control de acceso y monitoreo de logs.
+Tampoco deben subirse contraseñas reales, tokens, claves privadas ni credenciales de correo o base de datos.
 
-## Documentación adicional
+## 29. Estado del sistema
 
-Este repositorio debe contener o enlazar los siguientes documentos:
+Estado: Prototipo académico funcional.
 
-* Trabajo Fin de Grado en formato editable.
-* Manual de usuario.
-* Documentación técnica del sistema.
-* Código fuente completo del prototipo.
-* Evidencias de pruebas o anexos correspondientes.
+El sistema se encuentra desarrollado como producto mínimo viable para validación en entorno local. Las futuras mejoras previstas incluyen validación en contexto real, despliegue productivo, gestión multiempresa, integración con servicios externos y fortalecimiento de seguridad.
 
-## Autor
+## 30. Datos de la autora
 
 Araceli Magali Paiva Alfonso
 Universidad Autónoma de Encarnación
@@ -502,9 +588,3 @@ Carrera: Análisis de Sistemas Informáticos
 Línea de investigación: Ingeniería de Software
 Encarnación, Paraguay
 Año: 2026
-
-## Estado del proyecto
-
-Estado: Prototipo académico funcional.
-
-El sistema se encuentra desarrollado como producto mínimo viable para validación en entorno local. Las futuras mejoras previstas incluyen validación en contexto real, despliegue productivo, gestión multiempresa, integración con servicios externos y fortalecimiento de seguridad.
